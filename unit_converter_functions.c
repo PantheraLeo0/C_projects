@@ -128,3 +128,132 @@ void kilometer_to_foot(){
     scanf("%f",&kilometer_value);
     printf("%.3f kilometer is %.10f foot\n\n",kilometer_value,3280.839895 * kilometer_value);
 }
+
+//functions to convert mile to ...
+void mile_to_centimeter(){
+    float mile_value;
+    printf("mile : ");
+    scanf("%f",&mile_value);
+    printf("%.3f mile is %.3f centimeter\n\n",mile_value,160935 * mile_value);
+}
+
+void mile_to_millimeter(){
+    float mile_value;
+    printf("mile : ");
+    scanf("%f",&mile_value);
+    printf("%.3f mile is %.3f millimeter\n\n",mile_value,1609350 * mile_value);
+}
+
+void mile_to_meter(){
+    float mile_value;
+    printf("mile : ");
+    scanf("%f",&mile_value);
+    printf("%.3f mile is %.3f meter\n\n",mile_value,1609.35 * mile_value);
+}
+
+void mile_to_kilometer(){
+    float mile_value;
+    printf("mile : ");
+    scanf("%f",&mile_value);
+    printf("%.3f mile is %.10f kilometer\n\n",mile_value,1.60935 * mile_value);
+}
+
+void mile_to_yard(){
+    float mile_value;
+    printf("mile : ");
+    scanf("%f",&mile_value);
+    printf("%.3f mile is %.10f yard\n\n",mile_value,1760.0065617 * mile_value);
+}
+
+void mile_to_foot(){
+    float mile_value;
+    printf("mile : ");
+    scanf("%f",&mile_value);
+    printf("%.3f mile is %.10f foot\n\n",mile_value,5280.019685 * mile_value);
+}
+
+//functions to convert yard to ...
+void yard_to_centimeter(){
+    float yard_value;
+    printf("yard : ");
+    scanf("%f",&yard_value);
+    printf("%.3f yard is %.3f centimeter\n\n",yard_value,91.44 * yard_value);
+}
+
+void yard_to_millimeter(){
+    float yard_value;
+    printf("yard : ");
+    scanf("%f",&yard_value);
+    printf("%.3f yard is %.3f millimeter\n\n",yard_value,914.4 * yard_value);
+}
+
+void yard_to_meter(){
+    float yard_value;
+    printf("yard : ");
+    scanf("%f",&yard_value);
+    printf("%.3f yard is %.3f meter\n\n",yard_value,0.9144 * yard_value);
+}
+
+void yard_to_kilometer(){
+    float yard_value;
+    printf("yard : ");
+    scanf("%f",&yard_value);
+    printf("%.3f yard is %.10f kilometer\n\n",yard_value,0.0009144 * yard_value);
+}
+
+void yard_to_mile(){
+    float yard_value;
+    printf("yard : ");
+    scanf("%f",&yard_value);
+    printf("%.3f yard is %.10f mile\n\n",yard_value,0.0005681797 * yard_value);
+}
+
+void yard_to_foot(){
+    float yard_value;
+    printf("yard : ");
+    scanf("%f",&yard_value);
+    printf("%.3f yard is %.10f foot\n\n",yard_value,3 * yard_value);
+}
+
+//functions to convert foot to ...
+void foot_to_centimeter(){
+    float foot_value;
+    printf("foot : ");
+    scanf("%f",&foot_value);
+    printf("%.3f foot is %.3f centimeter\n\n",foot_value,30.48 * foot_value);
+}
+
+void foot_to_millimeter(){
+    float foot_value;
+    printf("foot : ");
+    scanf("%f",&foot_value);
+    printf("%.3f foot is %.3f millimeter\n\n",foot_value,304.8 * foot_value);
+}
+
+void foot_to_meter(){
+    float foot_value;
+    printf("foot : ");
+    scanf("%f",&foot_value);
+    printf("%.3f foot is %.3f meter\n\n",foot_value,0.3048 * foot_value);
+}
+
+void foot_to_kilometer(){
+    float foot_value;
+    printf("foot : ");
+    scanf("%f",&foot_value);
+    printf("%.3f foot is %.10f kilometer\n\n",foot_value,0.0003048 * foot_value);
+}
+
+void foot_to_mile(){
+    float foot_value;
+    printf("foot : ");
+    scanf("%f",&foot_value);
+    printf("%.3f foot is %.10f mile\n\n",foot_value,0.0001893932 * foot_value);
+}
+
+void foot_to_yard(){
+    float foot_value;
+    printf("foot : ");
+    scanf("%f",&foot_value);
+    printf("%.3f foot is %.10f yard\n\n",foot_value,0.3333333333 * foot_value);
+}
