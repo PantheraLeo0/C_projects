@@ -3,7 +3,22 @@
 #include <math.h>
 #include <stdlib.h>
 
+void password();
+void display();
+void addFun();
+void listFun();
+void modifyFun();
+void searchFun();
+void deleteFun();
+
 FILE *buffer_area, *temp_buffer_area;
+
+int main(){
+    password();   
+    display(); 
+    return 0;
+}
+
 void password(){
     char initial_password[] = "password";
     char final_password[50];
@@ -104,6 +119,8 @@ void modifyFun(){
     printf("Enter : ");
     scanf("%d",&option);
 
+    system("cls");
+
     if(option == 1){
         printf("Enter current name : ");
         scanf("%s",current_name);
@@ -170,6 +187,9 @@ void searchFun(){
     printf("2.Phone Number\n");
     printf("Enter : ");\
     scanf("%d",&option);
+
+    system("cls");
+
     if(option == 1){
         printf("Enter name : ");
         scanf("%s",temp_name);
@@ -192,7 +212,7 @@ void searchFun(){
     display();
 }
 
-void deleteFun(void){
+void deleteFun(){
     char name[100], temp_name[100];
     long int phone_number, temp_phone_number;
     int option;
@@ -205,6 +225,9 @@ void deleteFun(void){
     printf("2.Phone Number\n");
     printf("Enter : ");
     scanf("%d",&option);
+
+    system("cls");
+
     if(option == 1){
         printf("Enter name : ");
         scanf("%s",temp_name);
@@ -242,10 +265,4 @@ void deleteFun(void){
         fclose(temp_buffer_area);
     }
     display();
-}
-
-int main(){
-    password();   
-    display(); 
-    return 0;
 }
