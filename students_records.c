@@ -92,7 +92,7 @@ void change_key(){
     char confirm_new_key[100];
     
     printf("Current Key : ");
-    scanf("%s",&);
+    scanf("%s",current_key);
     printf("New Key :  ");
     scanf("%s",new_key);
     printf("Confirm New Key : ");
