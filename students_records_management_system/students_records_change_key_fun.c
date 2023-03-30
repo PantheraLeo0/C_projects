@@ -1,27 +1,29 @@
-#include "students_records_check_key_fun.c"
+int change_key(){
+    char current_key[100], temp_key[100], new_key[100];
 
-void change_key(){
-    char current_key[100], temp_current_key[100];
-    char new_key[100];
-    char confirm_new_key[100];
+    system("cls");
     
-    printf("Current Key : ");
+    printf("\n\tCurrent Password : ");
     scanf("%s",current_key);
-    printf("New Key :  ");
-    scanf("%s",new_key);
-    printf("Confirm New Key : ");
-    scanf("%s",confirm_new_key);
 
-    key_buffer = fopen("current_key.txt","r");
-    fscanf(key_buffer,"%s",temp_current_key);
+    buffer_area = fopen("current_key.txt","r");
 
-    if(strcmp(current_key,temp_current_key) == 0){
-        if(strcmp(new_key,confirm_new_key) == 0){
-            fclose(key_buffer);
-            key_buffer = fopen("current_key.txt","w");
-            fprintf(key_buffer,"%s",new_key);
-            printf("Password Changed Successfully");
-            }
+    while(fscanf(buffer_area,"%s",temp_key) != EOF){
+        if(strcmp(current_key,temp_key) == 0){
+            goto new_key;
         }
-    fclose(key_buffer);
+    }
+    new_key:
+    fclose(buffer_area);
+    buffer_area = fopen("current_key.txt","w");
+
+    printf("\n\tNew Password : ");
+    scanf("%s",new_key);
+
+    fprintf(buffer_area,"%s",new_key);
+
+    fclose(buffer_area);
+
+    printf("\n\tPassword Changed Successfully\n");
+    check_key();
 }
