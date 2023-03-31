@@ -168,12 +168,15 @@ int listFun(){
     system("cls");      /* clear the screen */
 
     printf("\tClass\tName    \t\t\tAddress\t\t\tContact\n\n");       /* print the attributes */
+
     while(fscanf(buffer_area,"%d%s%s%s",&s_class,s_name,s_address,s_phone) != EOF){     /* extracting data till the end of file */
         printf("\t%d\t%s    \t\t\t%s\t\t\t%s\n\n",s_class,s_name,s_address,s_phone);    /* printf data in table form */
     }
+
     fclose(buffer_area);        /* closing records.txt file*/
     printf("\tPress 'y' to exit or 'n' to Menu : ");    
     scanf(" %c",&temp);
+
     if(temp == 'y'){
         system("cls");
         return 0;
@@ -256,7 +259,7 @@ int searchFun(){
 
     while(fscanf(buffer_area,"%d %s %s %s",&s_temp_class,s_temp_name,s_temp_address,s_temp_phone) != EOF){
         if((strcmp(s_name,s_temp_name) == 0) && (s_class == s_temp_class)){
-            printf("\t%d\t%s\t%s\t%s\n",s_temp_class,s_temp_name,s_temp_address,s_temp_phone);
+            printf("\n\t%d\t%s\t%s\t%s\n",s_temp_class,s_temp_name,s_temp_address,s_temp_phone);
         }
     }
     fclose(buffer_area);
