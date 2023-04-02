@@ -148,7 +148,7 @@ void modifyFun(){
     printf("Change By...\n");
     printf("1.Name\n");
     printf("2.Phone Number\n");
-    printf("Enter : ");
+    printf("Enter (1-2): ");
     scanf("%d",&option);
 
     system("cls");
