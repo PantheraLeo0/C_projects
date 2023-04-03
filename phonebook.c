@@ -10,6 +10,7 @@ void listFun();
 void modifyFun();
 void searchFun();
 void deleteFun();
+void change_password();
 
 FILE *buffer_area, *temp_buffer_area;
 
@@ -48,6 +49,8 @@ void password(){
     fscanf(buffer_area,"%s",temp_access_key);
     fclose(buffer_area);
 
+    system("cls");
+
     if(strcmp(access_key,temp_access_key) == 0){
         printf("\n\tAccess Granted\n\n");
         display();
@@ -65,7 +68,8 @@ void display(){
     printf("\n\t4.Search Contact\n");
     printf("\n\t5.Delete Contact\n");
     printf("\n\t6.Exit Contact\n");
-    printf("\n\tEnter (1-6) : ");
+    printf("\n\t7.Change Password\n");
+    printf("\n\tEnter (1-7) : ");
     scanf("%d",&option);
 
     system("cls");
@@ -82,6 +86,8 @@ void display(){
         case 5: deleteFun();
         break;
         case 6: break;
+        case 7: change_password();
+        break;
     }
 }
 
@@ -130,113 +136,126 @@ void listFun(){
 }
 
 void modifyFun(){
-    char current_name[100], new_name[100];
-    char temp_name[100];
-    char current_phone_number[100], new_phone_number[100];
-    char phone_number[100], temp_phone_number[100];
     int option;
+    char current_name[100], new_name[100], temp_name[100];
+    char temp_phone[100];
+    char current_phone[100], new_phone[100];
 
     buffer_area = fopen("contacts.txt","r");
-    temp_buffer_area = fopen("temp_contacts.txt","w");
-
+    
     if(buffer_area == NULL){
         printf("Error!");
+        fclose(buffer_area);
     }
-    if(temp_buffer_area == NULL){
-        printf("Error!");
-    }
-    printf("Change By...\n");
-    printf("1.Name\n");
-    printf("2.Phone Number\n");
-    printf("Enter (1-2): ");
-    scanf("%d",&option);
+    else{
+        fclose(buffer_area);
 
-    system("cls");
+        printf("\n\tWhat do you want to Modify?\n");
+        printf("\n\t1.Name\n");
+        printf("\n\t2.Phone Number\n");
+        printf("\n\tEnter (1-2): ");
+        scanf("%d",&option);
 
-    if(option == 1){
-        printf("Enter current name : ");
-        scanf("%s",current_name);
-        printf("Enter new name");
-        scanf("%s",new_name);
+        system("cls");
+        if(option == 1){
+            printf("\n\tEnter current name : ");
+            scanf("%s",current_name);
+            printf("\n\tEnter new name : ");
+            scanf("%s",new_name);
 
-        while(fscanf(buffer_area,"%s %s",temp_name,temp_phone_number) != EOF){
+            buffer_area = fopen("contacts.txt","r");
+            temp_buffer_area = fopen("temp_contacts.txt","w");
+
+            while(fscanf(buffer_area,"%s %s",temp_name,temp_phone) != EOF){
                 if(strcmp(current_name,temp_name) == 0){
-                    strcpy(temp_name,new_name);
+                    fprintf(temp_buffer_area,"%s %s\n",new_name,temp_phone);
                 }
-                fprintf(temp_buffer_area,"%s\t\t\t%s",temp_name,temp_phone_number);
+                else{
+                    fprintf(temp_buffer_area,"%s %s\n",temp_name,temp_phone);
+                }
             }
             fclose(buffer_area);
             fclose(temp_buffer_area);
 
             buffer_area = fopen("contacts.txt","w");
             temp_buffer_area = fopen("temp_contacts.txt","r");
-
-            while(fscanf(temp_buffer_area,"%s %s",temp_name,temp_phone_number) != 0){
-                fprintf(buffer_area,"%s\t\t\t%s\n",temp_name,temp_phone_number);
-            }
-            fclose(buffer_area);
-            fclose(temp_buffer_area);
-            printf("Record Modified");
-            modifyFun();
-    }
-        if(option == 2){
-            printf("Enter current Phone : ");
-            scanf("%s",current_phone_number);
-            printf("Enter new Phone : ");
-            scanf("%s",&new_phone_number);
             
-            while(fscanf(buffer_area,"%s %s",temp_name,temp_phone_number) != EOF){
-                if(strcmp(current_phone_number,temp_phone_number) == 0){
-                    strcpy(temp_phone_number,new_phone_number);
+            while(fscanf(temp_buffer_area,"%s %s",temp_name,temp_phone) != EOF){
+                fprintf(buffer_area,"%s %s\n",temp_name,temp_phone);
+            }
+            fclose(buffer_area);
+            fclose(temp_buffer_area);
+
+            buffer_area = fopen("temp_contacts.txt","w");
+            fclose(buffer_area);
+        }
+
+        if(option == 2){
+            printf("\n\tEnter current Phone : ");
+            scanf("%s",current_phone);
+            printf("\n\tEnter new Phone : ");
+            scanf("%s",new_phone);
+
+            buffer_area = fopen("contacts.txt","r");
+            temp_buffer_area = fopen("temp_contacts.txt","w");
+
+            while(fscanf(buffer_area,"%s %s",temp_name,temp_phone) != EOF){
+                if(strcmp(current_phone,temp_phone) == 0){
+                    fprintf(temp_buffer_area,"%s %s\n",temp_name,new_phone);
                 }
-                fprintf(temp_buffer_area,"%s\t\t\t%s",temp_name,temp_phone_number);
+                else{
+                    fprintf(temp_buffer_area,"%s %s\n",temp_name,temp_phone);
+                }
             }
             fclose(buffer_area);
             fclose(temp_buffer_area);
 
             buffer_area = fopen("contacts.txt","w");
             temp_buffer_area = fopen("temp_contacts.txt","r");
-
-            while(fscanf(temp_buffer_area,"%s %s",temp_name,temp_phone_number) != 0){
-                fprintf(buffer_area,"%s\t\t\t%s\n",temp_name,temp_phone_number);
+            
+            while(fscanf(temp_buffer_area,"%s %s",temp_name,temp_phone) != EOF){
+                fprintf(buffer_area,"%s %s\n",temp_name,temp_phone);
             }
             fclose(buffer_area);
             fclose(temp_buffer_area);
-            printf("Data Modified Successfully");
-            modifyFun();
+
+            buffer_area = fopen("temp_contacts.txt","w");
+            fclose(buffer_area);
         }
+        printf("\n\tData modified Successfully\n\n");
         display();
+    }
 }
 
 void searchFun(){
     char name[100], temp_name[100];
-    long int phone_number, temp_phone_number;
+    char phone_number[100], temp_phone_number[100];
     int option;
     buffer_area = fopen("contacts.txt","r");
 
-    printf("Search By...\n\n ");
-    printf("1.Name\n");
-    printf("2.Phone Number\n");
-    printf("Enter : ");\
+    printf("\n\tSearch By...\n\n ");
+    printf("\n\t1.Name\n");
+    printf("\n\t2.Phone Number\n");
+    printf("\n\tEnter (1-2): ");\
     scanf("%d",&option);
 
     system("cls");
 
     if(option == 1){
-        printf("Enter name : ");
+        printf("\n\tEnter name : ");
         scanf("%s",temp_name);
-        while(fscanf(buffer_area,"%s %ld",name,&phone_number) != EOF){
+        while(fscanf(buffer_area,"%s %s",name,phone_number) != EOF){
             if(strcmp(name,temp_name) == 0){
-                printf("\n%s\t\t\t%ld\n",name,phone_number);
+                printf("\n\t%s\t\t\t%s\n",name,phone_number);
             }
         }
     }
     if(option == 2){
-        printf("Enter Phone : ");
-        scanf("%ld",&temp_phone_number);
-        while(fscanf(buffer_area,"%s %ld",name,&phone_number) != EOF){
-            if(phone_number == temp_phone_number){
-                printf("\n%s\t\t\t%ld\n",name,phone_number);
+        printf("\n\tEnter Phone : ");
+        scanf("%s",temp_phone_number);
+        while(fscanf(buffer_area,"%s %s",name,phone_number) != EOF){
+            if(strcmp(temp_phone_number,phone_number) == 0){
+                printf("\n\t%s\t\t\t%s\n",name,phone_number);
             }
         }
     }
@@ -246,55 +265,93 @@ void searchFun(){
 
 void deleteFun(){
     char name[100], temp_name[100];
-    long int phone_number, temp_phone_number;
+    char phone_number[100], temp_phone_number[100];
     int option;
 
     buffer_area = fopen("contacts.txt","r");
     temp_buffer_area = fopen("temp_contacts.txt","w");
 
-    printf("Delete By...\n");
-    printf("1.Name\n");
-    printf("2.Phone Number\n");
-    printf("Enter : ");
+    printf("\n\tDelete By...\n");
+    printf("\n\t1.Name\n");
+    printf("\n\t2.Phone Number\n");
+    printf("\n\tEnter : ");
     scanf("%d",&option);
 
     system("cls");
 
     if(option == 1){
-        printf("Enter name : ");
+        printf("\n\tEnter name : ");
         scanf("%s",temp_name);
-        while(fscanf(buffer_area,"%s %ld",name,&phone_number) != EOF){
+        while(fscanf(buffer_area,"%s %s",name,phone_number) != EOF){
             if(strcmp(name,temp_name) != 0){
-                fprintf(temp_buffer_area,"%s %ld",name,phone_number);
+                fprintf(temp_buffer_area,"%s %s\n",name,phone_number);
             }
         }
         fclose(buffer_area);
         fclose(temp_buffer_area);
         buffer_area = fopen("contacts.txt","w");
         temp_buffer_area = fopen("temp_contacts.txt","r");
-        while(fscanf(temp_buffer_area,"%s %ld",temp_name,temp_phone_number) != EOF){
-            fprintf(buffer_area,"%s\t\t\t%ld\n",temp_name,temp_phone_number);
+        while(fscanf(temp_buffer_area,"%s %s",temp_name,temp_phone_number) != EOF){
+            fprintf(buffer_area,"%s %s\n",temp_name,temp_phone_number);
         }
         fclose(buffer_area);
         fclose(temp_buffer_area);
+
+        buffer_area = fopen("temp_contacts.txt","w");
+        fclose(buffer_area);
+
     }
     if(option == 2){
-        printf("Enter Phone : ");
-        scanf("%ld",temp_phone_number);
-        while(fscanf(buffer_area,"%s %ld",name,&phone_number) != EOF){
-            if(phone_number != temp_phone_number){
-                fprintf(temp_buffer_area,"%s %ld",name,phone_number);
+        printf("\n\tEnter Phone : ");
+        scanf("%s",temp_phone_number);
+        while(fscanf(buffer_area,"%s %s",name,phone_number) != EOF){
+            if(strcmp(temp_phone_number,phone_number) != 0){
+                fprintf(temp_buffer_area,"%s %s",name,phone_number);
             }
         }
         fclose(buffer_area);
         fclose(temp_buffer_area);
         buffer_area = fopen("contacts.txt","w");
         temp_buffer_area = fopen("temp_contacts.txt","r");
-        while(fscanf(temp_buffer_area,"%s %ld",temp_name,temp_phone_number) != EOF){
-            fprintf(buffer_area,"%s\t\t\t%ld\n",temp_name,temp_phone_number);
+        while(fscanf(temp_buffer_area,"%s %s",temp_name,temp_phone_number) != EOF){
+            fprintf(buffer_area,"%s %s\n",temp_name,temp_phone_number);
         }
         fclose(buffer_area);
         fclose(temp_buffer_area);
+
+        buffer_area = fopen("temp_contacts.txt","w");
+        fclose(buffer_area);
     }
+    printf("\n\tData deleted successfully\n\n");
     display();
+}
+
+void change_password(){
+    char current_key[100], temp_key[100], new_key[100];
+
+    system("cls");
+    
+    printf("\n\tCurrent Password : ");
+    scanf("%s",current_key);
+
+    buffer_area = fopen("access_key.txt","r");
+
+    while(fscanf(buffer_area,"%s",temp_key) != EOF){
+        if(strcmp(current_key,temp_key) == 0){
+            goto new_key;
+        }
+    }
+    new_key:
+    fclose(buffer_area);
+    buffer_area = fopen("access_key.txt","w");
+
+    printf("\n\tNew Password : ");
+    scanf("%s",new_key);
+
+    fprintf(buffer_area,"%s",new_key);
+
+    fclose(buffer_area);
+
+    printf("\n\tPassword Changed Successfully\n");
+    password();
 }
