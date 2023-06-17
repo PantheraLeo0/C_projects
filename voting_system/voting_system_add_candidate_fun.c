@@ -46,3 +46,4 @@ void add_candidate()
         main();
     }
 }
+
