@@ -1,5 +1,7 @@
 #include "voting_system_MAIN.c"
 
+int CANDIDATE_NUMBER;
+
 void add_candidate()
 {
     system("cls");                      /* Clear the screen */
